@@ -15,11 +15,12 @@ The program comes with two main modules and a set of aux commands to be ran to h
 1. To load a module, just type out the name of the module. Ex: ShellLoader  
 2. To see the Modules options, use the Options command.  
 3. To set a modules option, use: Set optionName Value   
-4. To execute the module, use run   
+4. To execute the module, use run
 ![image](https://user-images.githubusercontent.com/15575425/158653827-46c72464-6336-44d0-b31b-0916156cd50b.png)
 
 ### AES encryption
 At the moment, the shellcode loader only takes AES encrypted shellcode. See my ShellcodeEncryption project for code that works with this project to decrypt the shellcode. Either way, the shellcode encryption password that should be used is **!r0nInj3ct0r123!** 
+https://github.com/Queen-City-Cyber/ShellcodeEncryption
 
 ### The Connect Assembly Command 
 This command is used to connect to an already loaded assembly after using exit on the interactive prompt from when the assembly is loaded using program Loader. 
