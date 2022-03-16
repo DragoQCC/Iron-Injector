@@ -7,7 +7,7 @@ namespace Iron_Injector
     {
         public static string prompt = "[Iron]>";
         public static string OrginalPrompt = "[Iron]>";
-        static void Main(string[] args)
+        public static void Main()
         {
             string input = "";
             UI.ui.Banner();

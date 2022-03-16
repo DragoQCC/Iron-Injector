@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Iron_Injector
 {
-    class h_reprobate
+    public class h_reprobate
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct UNICODE_STRING

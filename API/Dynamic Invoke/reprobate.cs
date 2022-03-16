@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Iron_Injector
 {
-    class reprobate
+    public class reprobate
     {
         /// <summary>
         /// Dynamically invoke an arbitrary function from a DLL, providing its name, function prototype, and arguments.
