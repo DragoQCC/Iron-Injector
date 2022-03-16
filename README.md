@@ -36,6 +36,7 @@ This shows an already loaded rubeus.exe; then, using the exit command, I stopped
 ** NOTE: the double quotes are just for formatting do not include when running command**    
 
 ### AV bypass?
+Uses D/Invoke from the wover, to manual map the needed dll files into the process memory and invoke the required methods without touching the hooked APIs from AAV/EDR products.
 I have found it works best with stageless shellcode and the program loader uses an amsi bypass to patch a small registry entry this has been caught on some runs and not on others. Like all AV bypasses the challenge and techniques are always updating and the program will be updated with new techniques in the future. 
 
 All testing was done as of 3/15/2022 against windows defender and bitdefender AV with cloud protections
@@ -48,7 +49,7 @@ All testing was done as of 3/15/2022 against windows defender and bitdefender AV
 - verification of user commands vs available commands  
 - verification that option trying to be set is real  
 - checks that all required options are set before running  
-- execution of encrypted shellcode   
+- Dynamic Invocation of encrypted shellcode without touching APIs that are hooked by AV/EDR.
 - execution of .net assemblies with the ability to restart interaction all in memory  
 - can itself be loaded into memory  
 
