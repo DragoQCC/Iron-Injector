@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Iron_Injector.Models
 {
-    internal class Data
+    public class Data
     {
         public static readonly List<Command> _Commands = new List<Command>();
         public static readonly List<Utilities> _Utilities = new List<Utilities>();

@@ -8,7 +8,7 @@ using Iron_Injector.Models.Abstracts;
 
 namespace Iron_Injector.Commands.Program_Commands
 {
-    internal class ConnectAssembly : Command
+    public class ConnectAssembly : Command
     {
         public override string Name => "ConnectAssembly";
 

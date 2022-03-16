@@ -3,7 +3,7 @@
 
 namespace Iron_Injector
 {
-    internal class Program
+    public class Program
     {
         public static string prompt = "[Iron]>";
         public static string OrginalPrompt = "[Iron]>";

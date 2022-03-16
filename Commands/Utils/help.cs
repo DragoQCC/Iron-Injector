@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Iron_Injector.Commands.Utils
 {
-    internal class help : Utilities
+    public class help : Utilities
     {
         public override string Name => "help";
 

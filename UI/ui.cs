@@ -10,7 +10,7 @@ using static Iron_Injector.Models.Data;
 
 namespace Iron_Injector.UI
 {
-    internal class ui
+    public class ui
     {
         public static void Banner()
         {
